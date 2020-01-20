@@ -20,7 +20,7 @@ public class JwtProvider {
 
     @Value("${jwtExpiration}")
     private int jwtExpiration;
-
+    //get authentication from request(include: username, password) then build Jwt Token
     public String generateJwtToken(Authentication authentication) {
 
         UserPrinciple userPrincipal = (UserPrinciple) authentication.getPrincipal();
@@ -32,7 +32,9 @@ public class JwtProvider {
 		                .signWith(SignatureAlgorithm.HS512, jwtSecret)
 		                .compact();
     }
-    
+
+    //receive request from client: Request data with JWt on Authorization header
+    //=> validate token valid or invalid
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
@@ -51,7 +53,9 @@ public class JwtProvider {
         
         return false;
     }
-    
+    //receive request from client: Request data with JWt on Authorization header
+    //=> validate token valid or invalid
+    //=> if valid => get username from Jwt Token
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser()
 			                .setSigningKey(jwtSecret)
