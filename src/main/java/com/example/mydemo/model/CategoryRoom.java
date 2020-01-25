@@ -14,7 +14,7 @@ public class CategoryRoom {
 
     private String nameCateRoom;
 
-    @OneToMany(mappedBy = "cateRoom")
+    @OneToMany(mappedBy = "cateRoom", cascade = CascadeType.ALL)
     private Set<Home> homes;
 
 

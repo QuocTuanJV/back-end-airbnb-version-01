@@ -13,7 +13,7 @@ public class CategoryHome {
     private Long id;
     private String nameCateHome;
 
-    @OneToMany(mappedBy = "cateHome")
+    @OneToMany(mappedBy = "cateHome", cascade = CascadeType.ALL)
     private Set<Home> homes;
 
     public CategoryHome(){
