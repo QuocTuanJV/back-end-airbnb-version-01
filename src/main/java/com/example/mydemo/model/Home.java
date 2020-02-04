@@ -11,13 +11,20 @@ public class Home {
     private String name;
     private Double price;
     private String image;
+    private String address;
+    private String description;
+    private int numberBath;
+    private int numberBad;
 
-    @ManyToOne
+//    @ManyToOne() ver-01
+//    @ManyToOne(cascade = CascadeType.ALL) ver-02
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "cate_room_id")
     private CategoryRoom cateRoom;
 
-    @ManyToOne
-    @JoinColumn(name = "cate_home_id")
+//    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "home_room_id")
     private CategoryHome cateHome;
 
     public Home(){
@@ -70,5 +77,37 @@ public class Home {
 
     public void setCateHome(CategoryHome cateHome) {
         this.cateHome = cateHome;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getNumberBath() {
+        return numberBath;
+    }
+
+    public void setNumberBath(int numberBath) {
+        this.numberBath = numberBath;
+    }
+
+    public int getNumberBad() {
+        return numberBad;
+    }
+
+    public void setNumberBad(int numberBad) {
+        this.numberBad = numberBad;
     }
 }
