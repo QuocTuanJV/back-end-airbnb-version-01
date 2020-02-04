@@ -8,6 +8,8 @@ public class Home_Form {
     private String description;
     private int numberBath;
     private int numberBad;
+    private Long cateRoom;
+    private Long cateHome;
 
     public Home_Form(){
 
@@ -67,5 +69,21 @@ public class Home_Form {
 
     public void setNumberBad(int numberBad) {
         this.numberBad = numberBad;
+    }
+
+    public Long getCateRoom() {
+        return cateRoom;
+    }
+
+    public void setCateRoom(Long cateRoom) {
+        this.cateRoom = cateRoom;
+    }
+
+    public Long getCateHome() {
+        return cateHome;
+    }
+
+    public void setCateHome(Long cateHome) {
+        this.cateHome = cateHome;
     }
 }

@@ -1,20 +1,26 @@
 package com.example.mydemo.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class CategoryHome {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "cate_home_id")
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+@Id
+@GenericGenerator(name = "itemIdGen", strategy = "increment")
+@GeneratedValue(generator = "itemIdGen")
+    @Column(name = "cate_home_id", nullable = false)
     private Long id;
+
     private String nameCateHome;
 
-//    @OneToMany(mappedBy = "cateHome", cascade = CascadeType.ALL) ver-01
-//    @OneToMany(mappedBy = "cateHome") ver-02
-    @OneToMany(mappedBy = "cateHome", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="cate_home_id", referencedColumnName="cate_home_id")
     private Set<Home> homes;
 
     public CategoryHome(){

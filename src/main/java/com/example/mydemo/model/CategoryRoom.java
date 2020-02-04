@@ -1,27 +1,32 @@
 package com.example.mydemo.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class CategoryRoom {
+    //    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "cate_room_id")
+    @GenericGenerator(name = "itemIdGen", strategy = "increment")
+    @GeneratedValue(generator = "itemIdGen")
+    @Column(name = "cate_room_id", nullable = false)
     private Long id;
 
     private String nameCateRoom;
 
-//    @OneToMany(mappedBy = "cateRoom", cascade = CascadeType.ALL) ver-01
-//    @OneToMany(mappedBy = "cateRoom") ver-02
-    @OneToMany(mappedBy = "cateRoom", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cate_room_id", referencedColumnName = "cate_room_id")
     private Set<Home> homes;
 
+    public CategoryRoom() {
+    }
 
-    public CategoryRoom(){}
-
-    public CategoryRoom(String nameCateRoom){
+    public CategoryRoom(String nameCateRoom) {
         this.nameCateRoom = nameCateRoom;
     }
 

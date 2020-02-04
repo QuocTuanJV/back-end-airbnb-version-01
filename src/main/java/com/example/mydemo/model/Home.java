@@ -1,13 +1,18 @@
 package com.example.mydemo.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
 @Table
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Home {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GenericGenerator(name="itemIdGen" , strategy="increment")
+    @GeneratedValue(generator="itemIdGen")
     private Long id;
+
     private String name;
     private Double price;
     private String image;
@@ -16,16 +21,11 @@ public class Home {
     private int numberBath;
     private int numberBad;
 
-//    @ManyToOne() ver-01
-//    @ManyToOne(cascade = CascadeType.ALL) ver-02
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "cate_room_id")
-    private CategoryRoom cateRoom;
+    @Column(name = "cate_room_id")
+    private Long cateRoom;
 
-//    @ManyToOne()
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "home_room_id")
-    private CategoryHome cateHome;
+    @Column(name = "cate_home_id")
+    private Long cateHome;
 
     public Home(){
 
@@ -63,19 +63,19 @@ public class Home {
         this.price = price;
     }
 
-    public CategoryRoom getCateRoom() {
+    public Long getCateRoom() {
         return cateRoom;
     }
 
-    public void setCateRoom(CategoryRoom cateRoom) {
+    public void setCateRoom(Long cateRoom) {
         this.cateRoom = cateRoom;
     }
 
-    public CategoryHome getCateHome() {
+    public Long getCateHome() {
         return cateHome;
     }
 
-    public void setCateHome(CategoryHome cateHome) {
+    public void setCateHome(Long cateHome) {
         this.cateHome = cateHome;
     }
 
