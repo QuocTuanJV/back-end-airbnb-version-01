@@ -18,6 +18,7 @@ import java.util.Set;
 public class User{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_user")
     private Long id;
 
     @NotBlank
@@ -44,6 +45,10 @@ public class User{
     	inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_user", referencedColumnName = "id_user")
+    private  Set<Booking> bookings;
+
     public User() {}
 
     public User(String name, String username, String email, String password) {
@@ -51,6 +56,14 @@ public class User{
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public Set<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(Set<Booking> bookings) {
+        this.bookings = bookings;
     }
 
     public Long getId() {

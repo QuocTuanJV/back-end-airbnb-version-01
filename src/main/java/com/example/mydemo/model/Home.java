@@ -11,6 +11,7 @@ public class Home {
     @Id
     @GenericGenerator(name="itemIdGen" , strategy="increment")
     @GeneratedValue(generator="itemIdGen")
+    @Column(name = "id_home")
     private Long id;
 
     private String name;
@@ -27,8 +28,20 @@ public class Home {
     @Column(name = "cate_home_id")
     private Long cateHome;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_home", referencedColumnName = "id_home")
+    private Booking booking;
+
     public Home(){
 
+    }
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 
     public String getImage() {
