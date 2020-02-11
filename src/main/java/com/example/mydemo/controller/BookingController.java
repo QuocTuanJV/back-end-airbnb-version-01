@@ -30,4 +30,14 @@ public class BookingController {
         Long idUserName = iUserService.findIdUserName(username).getId();
         return  new ResponseEntity<>(idUserName, HttpStatus.OK);
     }
+//    @PatchMapping("/booking/cancel-booking")
+//    public ResponseEntity<?> cancelBooking(@RequestParam("id") Long id){
+//        bookingService.setStatusBooking(id);
+//        return new ResponseEntity<>(new ResponseMessage("Cancel Booking success"), HttpStatus.OK);
+//    }
+    @PatchMapping("/booking/cancel-booking/{id}")
+    public ResponseEntity<?> cancelBooking(@PathVariable Long id){
+        bookingService.setStatusBooking(id);
+        return new ResponseEntity<>(new ResponseMessage("Cancel Booking success"), HttpStatus.OK);
+    }
 }

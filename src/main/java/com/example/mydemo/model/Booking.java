@@ -25,8 +25,18 @@ public class Booking {
     @Column(name = "id_home")
     private Long idHome;
 
+    private Long statusBook;
+
     public Booking(){
 
+    }
+
+    public Long getStatusBook() {
+        return statusBook;
+    }
+
+    public void setStatusBook(Long statusBook) {
+        this.statusBook = statusBook;
     }
 
     public Long getId() {
