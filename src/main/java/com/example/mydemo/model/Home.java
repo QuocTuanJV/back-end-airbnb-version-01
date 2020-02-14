@@ -21,6 +21,7 @@ public class Home {
     private String description;
     private int numberBath;
     private int numberBad;
+    private int statusHome;
 
     @Column(name = "cate_room_id")
     private Long cateRoom;
@@ -122,5 +123,13 @@ public class Home {
 
     public void setNumberBad(int numberBad) {
         this.numberBad = numberBad;
+    }
+
+    public int getStatusHome() {
+        return statusHome;
+    }
+
+    public void setStatusHome(int statusHome) {
+        this.statusHome = statusHome;
     }
 }

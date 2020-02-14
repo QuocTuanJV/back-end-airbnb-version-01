@@ -41,4 +41,9 @@ public class HomeServiceImpl implements HomeService {
         home.setCateHome(homeForm.getCateHome());
         home.setCateRoom(homeForm.getCateRoom());
     }
+
+    @Override
+    public void setStatusHome(Long id) {
+        homeRepository.updateStatus(id);
+    }
 }

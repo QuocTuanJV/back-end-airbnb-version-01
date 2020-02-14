@@ -12,4 +12,6 @@ public interface HomeService {
 
     List<Home> getAllHome();
     void setHomeProperties(Home home, Home_Form homeForm);
+
+    void setStatusHome(Long id);
 }

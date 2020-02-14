@@ -3,6 +3,7 @@ package com.example.mydemo.controller;
 import com.example.mydemo.message.response.ResponseMessage;
 import com.example.mydemo.model.Booking;
 import com.example.mydemo.services.BookingService;
+import com.example.mydemo.services.HomeService;
 import com.example.mydemo.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 public class BookingController {
     @Autowired
     private BookingService bookingService;
+
+    @Autowired
+    private HomeService homeService;
 
     @Autowired
     private IUserService iUserService;
@@ -39,5 +43,11 @@ public class BookingController {
     public ResponseEntity<?> cancelBooking(@PathVariable Long id){
         bookingService.setStatusBooking(id);
         return new ResponseEntity<>(new ResponseMessage("Cancel Booking success"), HttpStatus.OK);
+    }
+
+    @PatchMapping("/booking/update-status/{id}")
+    public ResponseEntity<?> updateStatusHome(@PathVariable Long id){
+        homeService.setStatusHome(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
