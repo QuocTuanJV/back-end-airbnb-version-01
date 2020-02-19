@@ -3,6 +3,7 @@ package com.example.mydemo.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -32,6 +33,11 @@ public class Home {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_home", referencedColumnName = "id_home")
     private Booking booking;
+
+    @OneToMany(cascade =  CascadeType.ALL)
+    @JoinColumn(name = "id_home", referencedColumnName = "id_home")
+    private List<Comment> comments;
+
 
     public Home(){
 
